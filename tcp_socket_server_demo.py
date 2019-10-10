@@ -38,7 +38,7 @@ class Handler(BaseRequestHandler):
     def handle(self):
         self.ip_addr,self.port = self.client_address
 
-        threading.Thread(target=period_send, args=(self.request, 3)).start()
+        # threading.Thread(target=period_send, args=(self.request, 3)).start()
 
         while True:
             try:

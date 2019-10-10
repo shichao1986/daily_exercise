@@ -48,7 +48,7 @@ if __name__ == '__main__':
 
     suite.addTest(testFab('test_fab'))
     suite.addTests([testFab('test_fab'),testFab('test_fab2')])
-    suite.addTests(unittest.load_tests(unittest.TestLoader().loadTestsFromTestCase(testFab))
+    suite.addTests(unittest.load_tests(unittest.TestLoader().loadTestsFromTestCase(testFab)))
 
     runner = unittest.TextTestRunner(verbosity=2)
     runner.run(suite)
