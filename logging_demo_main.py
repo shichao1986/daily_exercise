@@ -34,7 +34,7 @@ E 为一个模块（E.py），E.py内部的LOGGER = logging.getLogger(__name__) 
 
 That's all !     O(∩_∩)O
 """
-
+import sys
 import logging
 
 import logging_demo_a
@@ -71,7 +71,7 @@ if __name__ == '__main__':
     # logging.warning('logging message')
     # LOGGER.warning('warning message:{}'.format(__name__))
     # LOGGER_TEST.warning('test info')
-    LOGGER_CHILD.error('error message:{}'.format(__name__))
+    LOGGER_CHILD.error('{} error message:{}'.format(sys._getframe().f_lineno, __name__))
     # logging_demo_a.test_logger_log_a()
     # logging_demo_b.test_logger_log_b()
     # logging_demo_c.test_logger_log_c()
