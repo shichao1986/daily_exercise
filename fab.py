@@ -10,6 +10,8 @@
 """
 import random
 import logging
+import sys
+import threading
 def fab(n):
     if not isinstance(n, int):
         raise TypeError('n is not a Integer!')
@@ -88,6 +90,24 @@ class MyException(Exception):
     def __str__(self):
         return 'my exception'
 
+def func():
+    assert False, 'false assertion'
+    assert False, 'false2 assertion'
+
+# 函数对象第一次初始化会将每个参数的默认值存储在func2.__defaults__内，这是一个tuple
+# 后续函数运行时，对应的变量会取其中的值作为初始参数，对于普通的数据类型，函数内部
+# 不易改变函数参数的默认值，但若参数的默认值为可变数据类型，则函数内部很容易修改默认值
+# 这在大部分函数应用场景都与预期不符。所以函数默认值一般设置成None，而不使用list或字典
+def func2(testlist=[]):
+        print('inner func2 input testlist={}'.format(testlist))
+        testlist.append(1)
+        return testlist
+def func3(testlist=None):
+    cc = testlist
+    print(cc)
+    # func3.__defaults__ = ([],)
+    return testlist
+
 if __name__ == '__main__':
     # while True:
     #     n = input('please input number:')
@@ -105,18 +125,21 @@ if __name__ == '__main__':
     #     # print('fab_iter({})={}'.format(n, [i for i in fab_iter(n + 1)]))
 
     LOGGER = logging.getLogger()
+    # func()
+
+    nl = func2()
+    print(nl)
+
+    nl.append(100)
+
+    nl2 = func2()
+    print(nl2)
+
+    func3()
+    # import pdb;pdb.set_trace()
+    # print(func3())
+    # print(func3())
+    # print(func3())
+    # print(func3())
 
 
-    try:
-        try:
-            # raise MyException()
-            pass
-        # except MyException as e:
-        #     print(e)
-        # except Exception as e:
-        #     import pdb;pdb.set_trace()
-        #     print(type(e))
-        finally:
-            print(1)
-    except Exception as e:
-        print(2)
