@@ -12,6 +12,7 @@ import random
 import logging
 import sys
 import threading
+import time
 def fab(n):
     if not isinstance(n, int):
         raise TypeError('n is not a Integer!')
@@ -108,6 +109,29 @@ def func3(testlist=None):
     # func3.__defaults__ = ([],)
     return testlist
 
+a = dict()
+
+class ttt(object):
+    def __init__(self):
+        self._abc = 1
+
+    @property
+    def abc(self):
+        return self._abc
+
+
+class mytask(threading.Thread):
+
+    def __init__(self):
+        super(mytask, self).__init__()
+        self.start()
+
+    def run(self):
+        while True:
+            print('do task once!')
+            time.sleep(1)
+
+
 if __name__ == '__main__':
     # while True:
     #     n = input('please input number:')
@@ -124,22 +148,31 @@ if __name__ == '__main__':
     #     print(k)
     #     # print('fab_iter({})={}'.format(n, [i for i in fab_iter(n + 1)]))
 
-    LOGGER = logging.getLogger()
-    # func()
+    # LOGGER = logging.getLogger()
+    # # func()
+    #
+    # nl = func2()
+    # print(nl)
+    #
+    # nl.append(100)
+    #
+    # nl2 = func2()
+    # print(nl2)
+    #
+    # func3()
 
-    nl = func2()
-    print(nl)
+    t = ttt()
 
-    nl.append(100)
+    print('abc={}'.format(t.abc))
 
-    nl2 = func2()
-    print(nl2)
+    nt = mytask()
 
-    func3()
-    # import pdb;pdb.set_trace()
-    # print(func3())
-    # print(func3())
-    # print(func3())
-    # print(func3())
+    # try:
+    #     a['123'] = 123
+    #     raise MyException('123')
+    # except MyException as e:
+    #     print(e)
+    #     excp = sys.exc_info()[1]
+    #     print(excp)
 
 
